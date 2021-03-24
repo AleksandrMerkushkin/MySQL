@@ -1,0 +1,17 @@
+yum update
+wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+rpm -Uvh mysql80-community-release-el7-3.noarch.rpm
+yum install mysql-server
+systemctl start mysqld
+sudo grep 'password' /var/log/mysqld.log
+sudo mysql_secure_installation
+mysql -u root -p
+CREATE DATABASE sonar;
+CREATE USER 'sonar' IDENTIFIED BY 'Sonarqube62!';
+GRANT ALL ON sonar.* TO 'sonar'@'%';
+
+GRANT ALL PRIVILEGES ON sonar TO 'sonar' IDENTIFIED BY 'Sonarqube62!';
+GRANT ALL PRIVILEGES ON sonar.* TO 'sonar';
+
+FLUSH PRIVILEGES;
+exit
